@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2bd64e7e3ec345c88b613ff34efb8396" Name="Diagram1">
+        <EntityTypeShape EntityType="lastprakModel.Activity" Width="1.5" PointX="3" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="lastprakModel.Activity_Event" Width="1.5" PointX="8.25" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="lastprakModel.Activity_Topic" Width="1.5" PointX="3" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="lastprakModel.Activity_User" Width="1.5" PointX="5.25" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="lastprakModel.City" Width="1.5" PointX="3.75" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="lastprakModel.Country" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="lastprakModel.Event" Width="1.5" PointX="6" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="lastprakModel.Role" Width="1.5" PointX="0.75" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="lastprakModel.Sex" Width="1.5" PointX="0.75" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="lastprakModel.Topic" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="lastprakModel.User" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="lastprakModel.FK_Activity_Event_Activity" ManuallyRouted="false" />
+        <AssociationConnector Association="lastprakModel.FK_Activity_Topic_Activity" ManuallyRouted="false" />
+        <AssociationConnector Association="lastprakModel.FK_Activity_User_Activity" ManuallyRouted="false" />
+        <AssociationConnector Association="lastprakModel.FK_Activity_Event_Event" ManuallyRouted="false" />
+        <AssociationConnector Association="lastprakModel.FK_Activity_Topic_Topic" ManuallyRouted="false" />
+        <AssociationConnector Association="lastprakModel.FK_Activity_User_User" ManuallyRouted="false" />
+        <AssociationConnector Association="lastprakModel.FK_Event_City" ManuallyRouted="false" />
+        <AssociationConnector Association="lastprakModel.FK_User_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="lastprakModel.FK_Event_Topic" ManuallyRouted="false" />
+        <AssociationConnector Association="lastprakModel.FK_User_Role" ManuallyRouted="false" />
+        <AssociationConnector Association="lastprakModel.FK_User_Sex" ManuallyRouted="false" />
+        <AssociationConnector Association="lastprakModel.FK_User_Topic" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="lastprakModel.sysdiagrams" Width="1.5" PointX="7.375" PointY="0.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

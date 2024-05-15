@@ -1,0 +1,840 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище lastprakModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Activity">
+          <Key>
+            <PropertyRef Name="Idactivity" />
+          </Key>
+          <Property Name="Idactivity" Type="int" Nullable="false" />
+          <Property Name="activity" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Activity_Event">
+          <Key>
+            <PropertyRef Name="IDActivityEvent" />
+          </Key>
+          <Property Name="IDActivityEvent" Type="int" Nullable="false" />
+          <Property Name="activityID" Type="int" Nullable="false" />
+          <Property Name="eventID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Activity_Topic">
+          <Key>
+            <PropertyRef Name="IDActivityTopic" />
+          </Key>
+          <Property Name="IDActivityTopic" Type="int" Nullable="false" />
+          <Property Name="activityID" Type="int" Nullable="false" />
+          <Property Name="topicID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Activity_User">
+          <Key>
+            <PropertyRef Name="IDActivityUser" />
+          </Key>
+          <Property Name="IDActivityUser" Type="int" Nullable="false" />
+          <Property Name="activityID" Type="int" Nullable="false" />
+          <Property Name="userID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="Idcity" />
+          </Key>
+          <Property Name="Idcity" Type="int" Nullable="false" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="Idcountry" />
+          </Key>
+          <Property Name="Idcountry" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Language" Type="nvarchar" MaxLength="50" />
+          <Property Name="Code" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="Idevent" />
+          </Key>
+          <Property Name="Idevent" Type="int" Nullable="false" />
+          <Property Name="event" Type="nvarchar" MaxLength="100" />
+          <Property Name="DATE" Type="datetime" />
+          <Property Name="DAYS" Type="int" />
+          <Property Name="cityID" Type="int" />
+          <Property Name="topicID" Type="int" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Idrole" />
+          </Key>
+          <Property Name="Idrole" Type="int" Nullable="false" />
+          <Property Name="Role" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Sex">
+          <Key>
+            <PropertyRef Name="Idsex" />
+          </Key>
+          <Property Name="Idsex" Type="int" Nullable="false" />
+          <Property Name="SexName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Topic">
+          <Key>
+            <PropertyRef Name="Idtopic" />
+          </Key>
+          <Property Name="Idtopic" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="topic" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Iduser" />
+          </Key>
+          <Property Name="Iduser" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FIO" Type="nvarchar" MaxLength="50" />
+          <Property Name="mail" Type="nvarchar" MaxLength="50" />
+          <Property Name="dateofbirth" Type="datetime" />
+          <Property Name="countryID" Type="int" />
+          <Property Name="phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" />
+          <Property Name="photo" Type="nvarchar" MaxLength="50" />
+          <Property Name="roleID" Type="int" />
+          <Property Name="sexID" Type="int" />
+          <Property Name="topicID" Type="int" />
+        </EntityType>
+        <Association Name="FK_Activity_Event_Activity">
+          <End Role="Activity" Type="Self.Activity" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Activity_Event" Type="Self.Activity_Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Activity">
+              <PropertyRef Name="Idactivity" />
+            </Principal>
+            <Dependent Role="Activity_Event">
+              <PropertyRef Name="activityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Activity_Event_Event">
+          <End Role="Event" Type="Self.Event" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Activity_Event" Type="Self.Activity_Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="Idevent" />
+            </Principal>
+            <Dependent Role="Activity_Event">
+              <PropertyRef Name="eventID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Activity_Topic_Activity">
+          <End Role="Activity" Type="Self.Activity" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Activity_Topic" Type="Self.Activity_Topic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Activity">
+              <PropertyRef Name="Idactivity" />
+            </Principal>
+            <Dependent Role="Activity_Topic">
+              <PropertyRef Name="activityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Activity_Topic_Topic">
+          <End Role="Topic" Type="Self.Topic" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Activity_Topic" Type="Self.Activity_Topic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Topic">
+              <PropertyRef Name="Idtopic" />
+            </Principal>
+            <Dependent Role="Activity_Topic">
+              <PropertyRef Name="topicID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Activity_User_Activity">
+          <End Role="Activity" Type="Self.Activity" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Activity_User" Type="Self.Activity_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Activity">
+              <PropertyRef Name="Idactivity" />
+            </Principal>
+            <Dependent Role="Activity_User">
+              <PropertyRef Name="activityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Activity_User_User">
+          <End Role="User" Type="Self.User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Activity_User" Type="Self.Activity_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Iduser" />
+            </Principal>
+            <Dependent Role="Activity_User">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Event_City">
+          <End Role="City" Type="Self.City" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Event" Type="Self.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="Idcity" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="cityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Event_Topic">
+          <End Role="Topic" Type="Self.Topic" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Event" Type="Self.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Topic">
+              <PropertyRef Name="Idtopic" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="topicID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Country">
+          <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="Idcountry" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="countryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Idrole" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="roleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Sex">
+          <End Role="Sex" Type="Self.Sex" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sex">
+              <PropertyRef Name="Idsex" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="sexID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Topic">
+          <End Role="Topic" Type="Self.Topic" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Topic">
+              <PropertyRef Name="Idtopic" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="topicID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище lastprakModelContainer">
+          <EntitySet Name="Activity" EntityType="Self.Activity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Activity_Event" EntityType="Self.Activity_Event" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Activity_Topic" EntityType="Self.Activity_Topic" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Activity_User" EntityType="Self.Activity_User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Event" EntityType="Self.Event" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sex" EntityType="Self.Sex" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Topic" EntityType="Self.Topic" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Activity_Event_Activity" Association="Self.FK_Activity_Event_Activity">
+            <End Role="Activity" EntitySet="Activity" />
+            <End Role="Activity_Event" EntitySet="Activity_Event" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Activity_Event_Event" Association="Self.FK_Activity_Event_Event">
+            <End Role="Event" EntitySet="Event" />
+            <End Role="Activity_Event" EntitySet="Activity_Event" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Activity_Topic_Activity" Association="Self.FK_Activity_Topic_Activity">
+            <End Role="Activity" EntitySet="Activity" />
+            <End Role="Activity_Topic" EntitySet="Activity_Topic" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Activity_Topic_Topic" Association="Self.FK_Activity_Topic_Topic">
+            <End Role="Topic" EntitySet="Topic" />
+            <End Role="Activity_Topic" EntitySet="Activity_Topic" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Activity_User_Activity" Association="Self.FK_Activity_User_Activity">
+            <End Role="Activity" EntitySet="Activity" />
+            <End Role="Activity_User" EntitySet="Activity_User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Activity_User_User" Association="Self.FK_Activity_User_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Activity_User" EntitySet="Activity_User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Event_City" Association="Self.FK_Event_City">
+            <End Role="City" EntitySet="City" />
+            <End Role="Event" EntitySet="Event" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Event_Topic" Association="Self.FK_Event_Topic">
+            <End Role="Topic" EntitySet="Topic" />
+            <End Role="Event" EntitySet="Event" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Country" Association="Self.FK_User_Country">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Sex" Association="Self.FK_User_Sex">
+            <End Role="Sex" EntitySet="Sex" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Topic" Association="Self.FK_User_Topic">
+            <End Role="Topic" EntitySet="Topic" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="lastprakModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Activity">
+          <Key>
+            <PropertyRef Name="Idactivity" />
+          </Key>
+          <Property Name="Idactivity" Type="Int32" Nullable="false" />
+          <Property Name="activity1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Activity_Event" Relationship="Self.FK_Activity_Event_Activity" FromRole="Activity" ToRole="Activity_Event" />
+          <NavigationProperty Name="Activity_Topic" Relationship="Self.FK_Activity_Topic_Activity" FromRole="Activity" ToRole="Activity_Topic" />
+          <NavigationProperty Name="Activity_User" Relationship="Self.FK_Activity_User_Activity" FromRole="Activity" ToRole="Activity_User" />
+        </EntityType>
+        <EntityType Name="Activity_Event">
+          <Key>
+            <PropertyRef Name="IDActivityEvent" />
+          </Key>
+          <Property Name="IDActivityEvent" Type="Int32" Nullable="false" />
+          <Property Name="activityID" Type="Int32" Nullable="false" />
+          <Property Name="eventID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Activity" Relationship="Self.FK_Activity_Event_Activity" FromRole="Activity_Event" ToRole="Activity" />
+          <NavigationProperty Name="Event" Relationship="Self.FK_Activity_Event_Event" FromRole="Activity_Event" ToRole="Event" />
+        </EntityType>
+        <EntityType Name="Activity_Topic">
+          <Key>
+            <PropertyRef Name="IDActivityTopic" />
+          </Key>
+          <Property Name="IDActivityTopic" Type="Int32" Nullable="false" />
+          <Property Name="activityID" Type="Int32" Nullable="false" />
+          <Property Name="topicID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Activity" Relationship="Self.FK_Activity_Topic_Activity" FromRole="Activity_Topic" ToRole="Activity" />
+          <NavigationProperty Name="Topic" Relationship="Self.FK_Activity_Topic_Topic" FromRole="Activity_Topic" ToRole="Topic" />
+        </EntityType>
+        <EntityType Name="Activity_User">
+          <Key>
+            <PropertyRef Name="IDActivityUser" />
+          </Key>
+          <Property Name="IDActivityUser" Type="Int32" Nullable="false" />
+          <Property Name="activityID" Type="Int32" Nullable="false" />
+          <Property Name="userID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Activity" Relationship="Self.FK_Activity_User_Activity" FromRole="Activity_User" ToRole="Activity" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Activity_User_User" FromRole="Activity_User" ToRole="User" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="Idcity" />
+          </Key>
+          <Property Name="Idcity" Type="Int32" Nullable="false" />
+          <Property Name="City1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Event" Relationship="Self.FK_Event_City" FromRole="City" ToRole="Event" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="Idcountry" />
+          </Key>
+          <Property Name="Idcountry" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Language" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="User" Relationship="Self.FK_User_Country" FromRole="Country" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="Idevent" />
+          </Key>
+          <Property Name="Idevent" Type="Int32" Nullable="false" />
+          <Property Name="event1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DATE" Type="DateTime" Precision="3" />
+          <Property Name="DAYS" Type="Int32" />
+          <Property Name="cityID" Type="Int32" />
+          <Property Name="topicID" Type="Int32" />
+          <NavigationProperty Name="Activity_Event" Relationship="Self.FK_Activity_Event_Event" FromRole="Event" ToRole="Activity_Event" />
+          <NavigationProperty Name="City" Relationship="Self.FK_Event_City" FromRole="Event" ToRole="City" />
+          <NavigationProperty Name="Topic" Relationship="Self.FK_Event_Topic" FromRole="Event" ToRole="Topic" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Idrole" />
+          </Key>
+          <Property Name="Idrole" Type="Int32" Nullable="false" />
+          <Property Name="Role1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="User" Relationship="Self.FK_User_Role" FromRole="Role" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Sex">
+          <Key>
+            <PropertyRef Name="Idsex" />
+          </Key>
+          <Property Name="Idsex" Type="Int32" Nullable="false" />
+          <Property Name="SexName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="User" Relationship="Self.FK_User_Sex" FromRole="Sex" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Topic">
+          <Key>
+            <PropertyRef Name="Idtopic" />
+          </Key>
+          <Property Name="Idtopic" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="topic1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Activity_Topic" Relationship="Self.FK_Activity_Topic_Topic" FromRole="Topic" ToRole="Activity_Topic" />
+          <NavigationProperty Name="Event" Relationship="Self.FK_Event_Topic" FromRole="Topic" ToRole="Event" />
+          <NavigationProperty Name="User" Relationship="Self.FK_User_Topic" FromRole="Topic" ToRole="User" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Iduser" />
+          </Key>
+          <Property Name="Iduser" Type="Int32" Nullable="false" />
+          <Property Name="FIO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="mail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="dateofbirth" Type="DateTime" Precision="3" />
+          <Property Name="countryID" Type="Int32" />
+          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="photo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="roleID" Type="Int32" />
+          <Property Name="sexID" Type="Int32" />
+          <Property Name="topicID" Type="Int32" />
+          <NavigationProperty Name="Activity_User" Relationship="Self.FK_Activity_User_User" FromRole="User" ToRole="Activity_User" />
+          <NavigationProperty Name="Country" Relationship="Self.FK_User_Country" FromRole="User" ToRole="Country" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
+          <NavigationProperty Name="Sex" Relationship="Self.FK_User_Sex" FromRole="User" ToRole="Sex" />
+          <NavigationProperty Name="Topic" Relationship="Self.FK_User_Topic" FromRole="User" ToRole="Topic" />
+        </EntityType>
+        <Association Name="FK_Activity_Event_Activity">
+          <End Role="Activity" Type="Self.Activity" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Activity_Event" Type="Self.Activity_Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Activity">
+              <PropertyRef Name="Idactivity" />
+            </Principal>
+            <Dependent Role="Activity_Event">
+              <PropertyRef Name="activityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Activity_Topic_Activity">
+          <End Role="Activity" Type="Self.Activity" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Activity_Topic" Type="Self.Activity_Topic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Activity">
+              <PropertyRef Name="Idactivity" />
+            </Principal>
+            <Dependent Role="Activity_Topic">
+              <PropertyRef Name="activityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Activity_User_Activity">
+          <End Role="Activity" Type="Self.Activity" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Activity_User" Type="Self.Activity_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Activity">
+              <PropertyRef Name="Idactivity" />
+            </Principal>
+            <Dependent Role="Activity_User">
+              <PropertyRef Name="activityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Activity_Event_Event">
+          <End Role="Event" Type="Self.Event" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Activity_Event" Type="Self.Activity_Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="Idevent" />
+            </Principal>
+            <Dependent Role="Activity_Event">
+              <PropertyRef Name="eventID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Activity_Topic_Topic">
+          <End Role="Topic" Type="Self.Topic" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Activity_Topic" Type="Self.Activity_Topic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Topic">
+              <PropertyRef Name="Idtopic" />
+            </Principal>
+            <Dependent Role="Activity_Topic">
+              <PropertyRef Name="topicID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Activity_User_User">
+          <End Role="User" Type="Self.User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Activity_User" Type="Self.Activity_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Iduser" />
+            </Principal>
+            <Dependent Role="Activity_User">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Event_City">
+          <End Role="City" Type="Self.City" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Event" Type="Self.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="Idcity" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="cityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Country">
+          <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="Idcountry" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="countryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Event_Topic">
+          <End Role="Topic" Type="Self.Topic" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Event" Type="Self.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Topic">
+              <PropertyRef Name="Idtopic" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="topicID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Idrole" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="roleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Sex">
+          <End Role="Sex" Type="Self.Sex" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sex">
+              <PropertyRef Name="Idsex" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="sexID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Topic">
+          <End Role="Topic" Type="Self.Topic" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Topic">
+              <PropertyRef Name="Idtopic" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="topicID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="lastprakEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Activity" EntityType="Self.Activity" />
+          <EntitySet Name="Activity_Event" EntityType="Self.Activity_Event" />
+          <EntitySet Name="Activity_Topic" EntityType="Self.Activity_Topic" />
+          <EntitySet Name="Activity_User" EntityType="Self.Activity_User" />
+          <EntitySet Name="City" EntityType="Self.City" />
+          <EntitySet Name="Country" EntityType="Self.Country" />
+          <EntitySet Name="Event" EntityType="Self.Event" />
+          <EntitySet Name="Role" EntityType="Self.Role" />
+          <EntitySet Name="Sex" EntityType="Self.Sex" />
+          <EntitySet Name="Topic" EntityType="Self.Topic" />
+          <EntitySet Name="User" EntityType="Self.User" />
+          <AssociationSet Name="FK_Activity_Event_Activity" Association="Self.FK_Activity_Event_Activity">
+            <End Role="Activity" EntitySet="Activity" />
+            <End Role="Activity_Event" EntitySet="Activity_Event" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Activity_Topic_Activity" Association="Self.FK_Activity_Topic_Activity">
+            <End Role="Activity" EntitySet="Activity" />
+            <End Role="Activity_Topic" EntitySet="Activity_Topic" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Activity_User_Activity" Association="Self.FK_Activity_User_Activity">
+            <End Role="Activity" EntitySet="Activity" />
+            <End Role="Activity_User" EntitySet="Activity_User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Activity_Event_Event" Association="Self.FK_Activity_Event_Event">
+            <End Role="Event" EntitySet="Event" />
+            <End Role="Activity_Event" EntitySet="Activity_Event" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Activity_Topic_Topic" Association="Self.FK_Activity_Topic_Topic">
+            <End Role="Topic" EntitySet="Topic" />
+            <End Role="Activity_Topic" EntitySet="Activity_Topic" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Activity_User_User" Association="Self.FK_Activity_User_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Activity_User" EntitySet="Activity_User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Event_City" Association="Self.FK_Event_City">
+            <End Role="City" EntitySet="City" />
+            <End Role="Event" EntitySet="Event" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Country" Association="Self.FK_User_Country">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Event_Topic" Association="Self.FK_Event_Topic">
+            <End Role="Topic" EntitySet="Topic" />
+            <End Role="Event" EntitySet="Event" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Sex" Association="Self.FK_User_Sex">
+            <End Role="Sex" EntitySet="Sex" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Topic" Association="Self.FK_User_Topic">
+            <End Role="Topic" EntitySet="Topic" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <EntitySet Name="sysdiagrams" EntityType="lastprakModel.sysdiagrams" />
+        </EntityContainer>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище lastprakModelContainer" CdmEntityContainer="lastprakEntities1">
+          <EntitySetMapping Name="Activity">
+            <EntityTypeMapping TypeName="lastprakModel.Activity">
+              <MappingFragment StoreEntitySet="Activity">
+                <ScalarProperty Name="Idactivity" ColumnName="Idactivity" />
+                <ScalarProperty Name="activity1" ColumnName="activity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Activity_Event">
+            <EntityTypeMapping TypeName="lastprakModel.Activity_Event">
+              <MappingFragment StoreEntitySet="Activity_Event">
+                <ScalarProperty Name="IDActivityEvent" ColumnName="IDActivityEvent" />
+                <ScalarProperty Name="activityID" ColumnName="activityID" />
+                <ScalarProperty Name="eventID" ColumnName="eventID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Activity_Topic">
+            <EntityTypeMapping TypeName="lastprakModel.Activity_Topic">
+              <MappingFragment StoreEntitySet="Activity_Topic">
+                <ScalarProperty Name="IDActivityTopic" ColumnName="IDActivityTopic" />
+                <ScalarProperty Name="activityID" ColumnName="activityID" />
+                <ScalarProperty Name="topicID" ColumnName="topicID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Activity_User">
+            <EntityTypeMapping TypeName="lastprakModel.Activity_User">
+              <MappingFragment StoreEntitySet="Activity_User">
+                <ScalarProperty Name="IDActivityUser" ColumnName="IDActivityUser" />
+                <ScalarProperty Name="activityID" ColumnName="activityID" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="City">
+            <EntityTypeMapping TypeName="lastprakModel.City">
+              <MappingFragment StoreEntitySet="City">
+                <ScalarProperty Name="Idcity" ColumnName="Idcity" />
+                <ScalarProperty Name="City1" ColumnName="City" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Country">
+            <EntityTypeMapping TypeName="lastprakModel.Country">
+              <MappingFragment StoreEntitySet="Country">
+                <ScalarProperty Name="Idcountry" ColumnName="Idcountry" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Language" ColumnName="Language" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Event">
+            <EntityTypeMapping TypeName="lastprakModel.Event">
+              <MappingFragment StoreEntitySet="Event">
+                <ScalarProperty Name="Idevent" ColumnName="Idevent" />
+                <ScalarProperty Name="event1" ColumnName="event" />
+                <ScalarProperty Name="DATE" ColumnName="DATE" />
+                <ScalarProperty Name="DAYS" ColumnName="DAYS" />
+                <ScalarProperty Name="cityID" ColumnName="cityID" />
+                <ScalarProperty Name="topicID" ColumnName="topicID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role">
+            <EntityTypeMapping TypeName="lastprakModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="Idrole" ColumnName="Idrole" />
+                <ScalarProperty Name="Role1" ColumnName="Role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sex">
+            <EntityTypeMapping TypeName="lastprakModel.Sex">
+              <MappingFragment StoreEntitySet="Sex">
+                <ScalarProperty Name="Idsex" ColumnName="Idsex" />
+                <ScalarProperty Name="SexName" ColumnName="SexName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Topic">
+            <EntityTypeMapping TypeName="lastprakModel.Topic">
+              <MappingFragment StoreEntitySet="Topic">
+                <ScalarProperty Name="Idtopic" ColumnName="Idtopic" />
+                <ScalarProperty Name="topic1" ColumnName="topic" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="lastprakModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Iduser" ColumnName="Iduser" />
+                <ScalarProperty Name="FIO" ColumnName="FIO" />
+                <ScalarProperty Name="mail" ColumnName="mail" />
+                <ScalarProperty Name="dateofbirth" ColumnName="dateofbirth" />
+                <ScalarProperty Name="countryID" ColumnName="countryID" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="photo" ColumnName="photo" />
+                <ScalarProperty Name="roleID" ColumnName="roleID" />
+                <ScalarProperty Name="sexID" ColumnName="sexID" />
+                <ScalarProperty Name="topicID" ColumnName="topicID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="lastprakModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

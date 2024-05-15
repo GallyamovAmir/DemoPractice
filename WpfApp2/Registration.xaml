@@ -1,0 +1,105 @@
+﻿<Window x:Class="WpfApp2.Registration"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp2"
+        mc:Ignorable="d"
+        Title="Registration" Height="500" Width="1000">
+
+    <Window.Resources>
+        <Style TargetType="Label">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontFamily" Value="SF Pro Text"/>
+            <Setter Property="Height" Value="80"/>
+        </Style>
+        
+            <Style TargetType="TextBox">
+                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="Height" Value="30"/>
+                <Style.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5" />
+                    </Style>
+                </Style.Resources>
+            </Style>
+
+            <Style TargetType="DatePicker">
+                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="Height" Value="33"/>
+                <Style.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5" />
+                    </Style>
+                </Style.Resources>
+            </Style>
+
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <ScrollViewer Grid.Row="0" Grid.Column="0">
+            <Grid Grid.Row="0" Grid.Column="0" Width="460" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition/>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition/>
+                    <RowDefinition />
+                    <RowDefinition/>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0" Content="ФИО" />
+                <TextBox Grid.Row="0" x:Name="FIO" />
+
+                <Label Grid.Row="1" Content="Почта" />
+                <TextBox Grid.Row="1" x:Name="Email" />
+
+                <Label Grid.Row="2" Content="Дата рождения" />
+                <DatePicker Grid.Row="2" x:Name="DateOfBirth" />
+
+                <Label Grid.Row="3" Content="Страна" />
+                <ComboBox Grid.Row="3" Height="30" x:Name="CountryId"/>
+
+                <Label Grid.Row="4" Content="Телефон" />
+                <TextBox Grid.Row="4" x:Name="Phone"/>
+
+                <Label Grid.Row="5" Content="Пароль" />
+                <TextBox Grid.Row="5" x:Name="Password"/>
+
+                <Label Grid.Row="6" Content="Фото" />
+                <TextBox Grid.Row="6" x:Name="Photo"/>
+
+                <Label Grid.Row="7" Content="Роль"/>
+                <ComboBox Grid.Row="7" Height="30" x:Name="RoleId"/>
+
+                <Label Grid.Row="8" Content="Пол"/>
+                <ComboBox Grid.Row="8" Height="30" x:Name="SexId"/>
+
+                <Label Grid.Row="9" Content="Направление"/>
+                <ComboBox Grid.Row="9" Height="30" x:Name="TopicId"/>
+            </Grid>
+        </ScrollViewer>
+
+        <StackPanel Grid.Column="1">
+            <Button Content="Ок" Margin="2" Height="35" Width="100" Click="RegistrationUser"/>
+            <Button Content="Отмена" Margin="2" Height="35" Width="100" Click="Button_Click"/>
+        </StackPanel>
+
+    </Grid>
+</Window>
